@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'groovy'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,4 +29,22 @@ task createClasspathManifest {
 
 dependencies {
     testRuntime files(createClasspathManifest)
+}
+
+// 本地调试
+def groupId = 'me.ele'
+version = '1.0.8'
+def artifactId = 'lancet-plugin'
+
+// 上传本地maven库
+uploadArchives {
+    version = version + '-SNAPSHOT'
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: uri('../snapshotRepo'))
+            pom.groupId = groupId
+            pom.artifactId = artifactId
+            pom.version = version
+        }
+    }
 }
