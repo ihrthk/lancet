@@ -1,9 +1,7 @@
 package me.ele.lancet.weaver.internal.asm;
 
-import me.ele.lancet.weaver.internal.graph.Graph;
-import me.ele.lancet.weaver.internal.util.Bitset;
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.ModuleVisitor;
 import org.objectweb.asm.Opcodes;
 
 /**
@@ -41,5 +39,8 @@ public class LinkedClassVisitor extends ClassVisitor {
         cv = classVisitor;
     }
 
-
+    @Override
+    public ModuleVisitor visitModule(String name, int access, String version) {
+        return null;
+    }
 }

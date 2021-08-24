@@ -1,13 +1,22 @@
 package me.ele.lancet.plugin.internal.preprocess;
 
-import me.ele.lancet.base.annotations.*;
-import me.ele.lancet.weaver.internal.graph.ClassEntity;
-import me.ele.lancet.weaver.internal.graph.FieldEntity;
-import me.ele.lancet.weaver.internal.graph.MethodEntity;
-import org.objectweb.asm.*;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.ModuleVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import me.ele.lancet.base.annotations.Insert;
+import me.ele.lancet.base.annotations.Proxy;
+import me.ele.lancet.base.annotations.TryCatchHandler;
+import me.ele.lancet.weaver.internal.graph.ClassEntity;
+import me.ele.lancet.weaver.internal.graph.FieldEntity;
+import me.ele.lancet.weaver.internal.graph.MethodEntity;
 
 /**
  * Created by gengwanpeng on 17/4/27.
@@ -59,5 +68,10 @@ public class PreProcessClassVisitor extends ClassVisitor {
         if (!isHookClass && (INSERT.equals(desc) || PROXY.equals(desc) || TRY_CATCH.equals(desc))) {
             isHookClass = true;
         }
+    }
+
+    @Override
+    public ModuleVisitor visitModule(String name, int access, String version) {
+        return null;
     }
 }
